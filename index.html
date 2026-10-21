@@ -501,7 +501,7 @@ a { color: var(--accent); }
   var svg = document.getElementById("chart");
   if (!svg) return;
   var NS = "http://www.w3.org/2000/svg";
-  var L = 46, R = 486, T = 14, B = 246, YMIN = -300, YMAX = 450;
+  var L = 66, R = 486, T = 14, B = 246, YMIN = -300, YMAX = 450;
   function x(m) { return L + (m - 1) / 23 * (R - L); }
   function y(v) { return T + (YMAX - v) / (YMAX - YMIN) * (B - T); }
   function el(name, attrs, text) {
