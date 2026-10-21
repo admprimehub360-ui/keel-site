@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!--
+ARQUIVO: index.html (página inicial do site Keel)
+FUNÇÃO: apresenta o Keel, mostra como funciona, recursos, preços e dúvidas.
+BLOCOS: 1) cabeçalho  2) hero + exemplo do produto  3) perguntas do fundador
+        4) como funciona  5) recursos  6) IA e dados  7) preços  8) dúvidas  9) rodapé  10) script do gráfico
+FONTES: Manrope (títulos) e Inter (texto), conforme o Brand Book v1.0.
+-->
+<title>Keel | Clareza financeira para crescer</title>
+<meta name="description" content="O Keel mostra, em minutos e sem planilha, até quando o seu caixa aguenta e quando o seu negócio se paga. Planejamento financeiro para startups e pequenos negócios.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@700;800&display=swap">
+<style>
+/* Layout: página única de leitura, texto à esquerda, exemplo real do produto ao lado do título. A régua de marcas (ideia da bússola) separa blocos. */
+:root {
+  --bg: #FFFFFF;
+  --bg-alt: #F4F6F9;
+  --card: #FFFFFF;
+  --ink: #101E32;
+  --fg: #253247;
+  --muted: #5B6B82;
+  --line: #E3E8EF;
+  --accent: #2563EB;
+  --btn: #2563EB;
+  --btn-fg: #FFFFFF;
+  --soft: #EEF3FE;
+  --good-bg: #DDF5E8;
+  --good-fg: #0F5132;
+  --neg: #B42318;
+  --pess: #D9531E;
+  --opt: #0E9F6E;
+  --band: #101E32;
+  --band-fg: #E6ECF5;
+  --band-muted: #B8C4D6;
+  --band-line: #26395A;
+  --tick-on: #101E32;
+  --tick-off: #8FB0F5;
+  --font-head: "Manrope", "Inter", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0A1322; --bg-alt: #0E192B; --card: #122038; --ink: #F2F5FA; --fg: #D3DBE8; --muted: #9BA9BF;
+    --line: #22344F; --accent: #7BA4FF; --soft: #16284A; --good-bg: #12382B; --good-fg: #8FE0B8;
+    --neg: #FF8A7A; --pess: #F0794A; --opt: #35C48F; --band: #0F1D34; --band-line: #26395A;
+    --tick-on: #E6ECF5; --tick-off: #5B8DEF; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0A1322; --bg-alt: #0E192B; --card: #122038; --ink: #F2F5FA; --fg: #D3DBE8; --muted: #9BA9BF;
+  --line: #22344F; --accent: #7BA4FF; --soft: #16284A; --good-bg: #12382B; --good-fg: #8FE0B8;
+  --neg: #FF8A7A; --pess: #F0794A; --opt: #35C48F; --band: #0F1D34; --band-line: #26395A;
+  --tick-on: #E6ECF5; --tick-off: #5B8DEF; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 110px; }
+body {
+  margin: 0; background: var(--bg); color: var(--fg);
+  font-family: var(--font-body); font-size: 17px; line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+body::before {
+  content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px);
+  z-index: 30; background: var(--bg);
+}
+h1, h2, h3 { font-family: var(--font-head); color: var(--ink); margin: 0; text-wrap: balance; }
+h1 { font-size: clamp(2.3rem, 5.4vw, 3.7rem); line-height: 1.05; font-weight: 800; letter-spacing: -0.02em; }
+h2 { font-size: clamp(1.7rem, 3.4vw, 2.4rem); line-height: 1.15; font-weight: 800; letter-spacing: -0.015em; }
+h3 { font-size: 1.1rem; line-height: 1.3; font-weight: 700; }
+p { margin: 0; }
+a { color: var(--accent); }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+
+.wrap {
+  width: 100%; max-width: 1180px; margin: 0 auto;
+  padding-left: max(20px, env(safe-area-inset-left, 0px));
+  padding-right: max(20px, env(safe-area-inset-right, 0px));
+}
+.section { padding-block: clamp(56px, 8vw, 104px); }
+.alt { background: var(--bg-alt); }
+.eyebrow { font-size: 0.8rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+.lead { font-size: 1.15rem; color: var(--muted); max-width: 40rem; }
+.small { font-size: 0.88rem; color: var(--muted); }
+
+/* botões */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 48px; padding: 0 22px; border-radius: 10px; font: 600 1rem var(--font-body);
+  text-decoration: none; border: 1.5px solid transparent; cursor: pointer; white-space: nowrap;
+}
+.btn-primary { background: var(--btn); color: var(--btn-fg); }
+.btn-primary:hover { filter: brightness(1.08); }
+.btn-ghost { background: transparent; color: var(--ink); border-color: var(--line); }
+.btn-ghost:hover { border-color: var(--accent); }
+.btn-sm { min-height: 40px; padding: 0 16px; font-size: 0.92rem; }
+
+/* 1) cabeçalho */
+.site-header {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
+  background: var(--bg); border-bottom: 1px solid var(--line);
+}
+.site-header .wrap { display: flex; align-items: center; gap: 16px 28px; flex-wrap: wrap; min-height: 68px; padding-block: 10px; }
+.brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); }
+.brand svg { width: 34px; height: 34px; flex: none; }
+.brand span { font: 800 1.35rem var(--font-head); letter-spacing: 0.06em; }
+.nav { display: flex; gap: 6px 22px; margin-left: auto; align-items: center; }
+.nav a:not(.btn) { color: var(--fg); text-decoration: none; font-weight: 500; font-size: 0.95rem; padding: 8px 2px; }
+.nav a:not(.btn):hover { color: var(--accent); }
+@media (max-width: 760px) {
+  .site-header .wrap { min-height: 0; }
+  .nav { order: 3; width: 100%; margin-left: 0; overflow-x: auto; gap: 20px; padding-bottom: 2px; }
+  .nav .btn { display: none; }
+  .site-header .btn-top { margin-left: auto; }
+}
+@media (min-width: 761px) { .site-header .btn-top { display: none; } }
+
+/* 2) hero */
+.hero { background: var(--bg-alt); padding-block: clamp(44px, 7vw, 88px) clamp(48px, 7vw, 80px); }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(32px, 5vw, 64px); align-items: center; }
+.hero h1 { margin-bottom: 22px; }
+.hero .lead { margin-bottom: 30px; }
+.cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 18px; }
+.ruler { display: block; height: 22px; width: 100%; max-width: 280px; margin: 26px 0 8px; display: flex; }
+.ruler i { display: block; height: 100%; }
+.ruler .on { width: 70%; background: repeating-linear-gradient(90deg, var(--tick-on) 0 2px, transparent 2px 7px); }
+.ruler .off { width: 30%; background: repeating-linear-gradient(90deg, var(--tick-off) 0 2px, transparent 2px 7px); }
+@media (max-width: 900px) { .hero-grid { grid-template-columns: minmax(0, 1fr); } }
+
+/* exemplo do produto */
+.mock {
+  background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+  padding: clamp(16px, 2.4vw, 24px); box-shadow: 0 18px 40px -22px rgba(16, 30, 50, 0.35);
+}
+.mock-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+.mock-top h3 { font-size: 1.2rem; }
+.tag { font-size: 0.74rem; font-weight: 600; letter-spacing: 0.04em; padding: 3px 10px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); }
+.metrics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-bottom: 16px; }
+.metric { background: var(--bg-alt); border-radius: 12px; padding: 12px 14px; min-width: 0; }
+.metric small { display: block; font-size: 0.74rem; color: var(--muted); line-height: 1.3; min-height: 2.6em; }
+.metric strong { display: block; font: 800 1.45rem/1.2 var(--font-head); color: var(--ink); margin-top: 6px; font-variant-numeric: tabular-nums; }
+.metric strong.neg { color: var(--neg); }
+.chart-box svg { display: block; width: 100%; height: auto; }
+.chart-box text { font: 500 13px var(--font-body); fill: var(--muted); }
+.chart-box .lbl { fill: var(--fg); font-weight: 600; }
+.chart-box .tip-t { fill: #FFFFFF; font-weight: 600; font-size: 12.5px; }
+.mock-foot { margin-top: 10px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.mock-foot .ruler { margin: 0; max-width: 150px; height: 16px; }
+@media (max-width: 480px) { .metric strong { font-size: 1.15rem; } .metric small { font-size: 0.7rem; } .metrics { gap: 8px; } .metric { padding: 10px; } }
+
+/* 3) perguntas */
+.q-list { margin-top: 40px; border-top: 1px solid var(--line); }
+.q-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 12px 48px; padding-block: 26px; border-bottom: 1px solid var(--line); }
+.q-row h3 { font-size: 1.25rem; }
+.q-row p { color: var(--fg); }
+@media (max-width: 760px) { .q-row { grid-template-columns: minmax(0, 1fr); } }
+
+/* 4) como funciona */
+.steps { margin-top: 44px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; counter-reset: step; }
+.step { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 26px; }
+.step .n { font: 800 0.95rem var(--font-head); color: var(--accent); margin-bottom: 14px; display: block; }
+.step h3 { margin-bottom: 10px; }
+.step p { color: var(--muted); font-size: 0.98rem; }
+@media (max-width: 860px) { .steps { grid-template-columns: minmax(0, 1fr); } }
+
+/* 5) recursos */
+.features { margin-top: 44px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 56px; }
+.feat { padding-block: 22px; border-top: 1px solid var(--line); }
+.feat h3 { margin-bottom: 6px; }
+.feat p { color: var(--muted); font-size: 0.98rem; }
+@media (max-width: 760px) { .features { grid-template-columns: minmax(0, 1fr); } }
+
+/* 6) IA e dados (faixa escura) */
+.band { background: var(--band); color: var(--band-fg); border-block: 1px solid var(--band-line); }
+.band h2 { color: #FFFFFF; max-width: 22ch; }
+.band .eyebrow { color: #8FB0F5; }
+.trust { margin-top: 44px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 36px; }
+.trust h3 { color: #FFFFFF; margin-bottom: 8px; }
+.trust p { color: var(--band-muted); font-size: 0.98rem; }
+.trust > div { border-top: 1px solid var(--band-line); padding-top: 20px; }
+@media (max-width: 860px) { .trust { grid-template-columns: minmax(0, 1fr); gap: 28px; } }
+
+/* 7) preços */
+.plans { margin-top: 44px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; align-items: stretch; }
+.plan { background: var(--card); border: 1.5px solid var(--line); border-radius: 16px; padding: 26px; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.plan.best { border-color: var(--accent); box-shadow: 0 0 0 3px var(--soft); }
+.plan-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; min-height: 28px; }
+.plan-head h3 { font-size: 1.05rem; }
+.badge { background: var(--btn); color: var(--btn-fg); font-size: 0.72rem; font-weight: 600; padding: 3px 10px; border-radius: 999px; }
+.price { font: 800 2.3rem/1.15 var(--font-head); color: var(--ink); margin-top: 10px; font-variant-numeric: tabular-nums; }
+.price small { font: 500 1rem var(--font-body); color: var(--muted); }
+.plan .total { color: var(--muted); font-size: 0.92rem; min-height: 3em; }
+.save { align-self: flex-start; background: var(--good-bg); color: var(--good-fg); font-size: 0.8rem; font-weight: 600; padding: 3px 12px; border-radius: 999px; min-height: 26px; }
+.save.none { background: transparent; }
+.plan .btn { margin-top: 18px; width: 100%; }
+.one-plan { margin-top: 44px; display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 32px 56px; align-items: center; }
+.one-plan .incl { margin-top: 0; grid-template-columns: minmax(0, 1fr); gap: 14px; }
+@media (max-width: 860px) { .one-plan { grid-template-columns: minmax(0, 1fr); } }
+.incl { margin-top: 36px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 40px; padding: 0; list-style: none; }
+.incl li { position: relative; padding-left: 28px; }
+.incl li::before { content: ""; position: absolute; left: 4px; top: 0.42em; width: 7px; height: 12px; border: solid var(--accent); border-width: 0 2.5px 2.5px 0; transform: rotate(45deg); }
+.price-notes { margin-top: 22px; display: grid; gap: 6px; max-width: 46rem; }
+@media (max-width: 860px) { .plans { grid-template-columns: minmax(0, 1fr); } .incl { grid-template-columns: minmax(0, 1fr); } .plan .total { min-height: 0; } }
+
+/* 8) dúvidas */
+.faq { margin-top: 40px; max-width: 52rem; border-top: 1px solid var(--line); }
+.faq details { border-bottom: 1px solid var(--line); }
+.faq summary { cursor: pointer; list-style: none; padding: 20px 36px 20px 0; position: relative; font: 700 1.08rem var(--font-head); color: var(--ink); }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; position: absolute; right: 4px; top: 50%; transform: translateY(-50%); font: 500 1.6rem var(--font-body); color: var(--accent); }
+.faq details[open] summary::after { content: "–"; }
+.faq details p { padding: 0 0 22px; color: var(--muted); max-width: 44rem; }
+
+/* chamada final e rodapé */
+.final { display: grid; grid-template-columns: minmax(0, 1.3fr) auto; gap: 24px 48px; align-items: center; }
+.final h2 { margin-bottom: 10px; }
+@media (max-width: 760px) { .final { grid-template-columns: minmax(0, 1fr); } }
+.site-footer { background: var(--bg-alt); border-top: 1px solid var(--line); padding-block: 48px; }
+.foot-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 28px 48px; }
+.foot-grid p { font-size: 0.9rem; color: var(--muted); max-width: 40rem; }
+.foot-links { display: flex; flex-wrap: wrap; gap: 8px 24px; font-size: 0.92rem; color: var(--fg); }
+.legal { margin-top: 18px; display: grid; gap: 8px; }
+@media (max-width: 760px) { .foot-grid { grid-template-columns: minmax(0, 1fr); } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+.enemy { margin-top: 48px; padding-top: 36px; border-top: 1px solid var(--line); max-width: 52rem; }
+.enemy-t { font: 800 clamp(1.4rem, 3vw, 2rem)/1.25 var(--font-head); color: var(--ink); margin: 0 0 14px; text-wrap: balance; }
+</style>
+</head>
+<body>
+<!-- 1) CABEÇALHO -->
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="#topo" aria-label="Keel, início">
+      <svg viewBox="0 0 56 56" role="img" aria-hidden="true">
+        <circle cx="28" cy="28" r="28" fill="#0A2352"/>
+        <polygon points="23.3,23.6 10.1,45.9 27,35" fill="#2272F5"/>
+        <polygon points="27,35 10.1,45.9 31.7,32.7" fill="#1B54B8"/>
+        <polygon points="45.2,10.5 23.3,23.6 31.7,32.7" fill="#FFFFFF"/>
+      </svg>
+      <span>KEEL</span>
+    </a>
+    <nav class="nav" aria-label="Principal">
+      <a href="#como-funciona">Como funciona</a>
+      <a href="#recursos">Recursos</a>
+      <a href="#precos">Preços</a>
+      <a href="#duvidas">Dúvidas</a>
+      <a href="sobre.html">Sobre</a>
+      <a href="contato.html">Contato</a>
+      <a href="https://app.keelapp.com.br/">Entrar</a>
+      <a class="btn btn-primary btn-sm" href="https://app.keelapp.com.br/?cadastro=1">Começar teste grátis</a>
+    </nav>
+    <a class="btn btn-primary btn-sm btn-top" href="https://app.keelapp.com.br/?cadastro=1">Começar</a>
+  </div>
+</header>
+
+<main id="topo">
+<!-- 2) HERO + EXEMPLO DO PRODUTO -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow">Planejamento financeiro para startups</p>
+      <h1>Decida com números. Cresça com direção.</h1>
+      <p class="lead">O Keel mostra, em minutos e sem planilha, até quando o seu caixa aguenta e quando o negócio se paga.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="https://app.keelapp.com.br/?cadastro=1">Começar teste grátis</a>
+        <a class="btn btn-ghost" href="#como-funciona">Ver como funciona</a>
+      </div>
+      <p class="small">7 dias de teste, sem cartão. Os resultados são estimativas, calculadas com os números que você informa.</p>
+    </div>
+
+    <div class="mock" aria-label="Exemplo de resultado de um plano no Keel">
+      <div class="mock-top">
+        <h3>Resultado do plano</h3>
+        <span class="tag">Exemplo: SaaS para clínicas</span>
+      </div>
+      <div class="metrics">
+        <div class="metric"><small>Até quando o caixa dura?</small><strong>14 meses</strong></div>
+        <div class="metric"><small>Quando o negócio se equilibra?</small><strong>mês 18</strong></div>
+        <div class="metric"><small>Qual o pior saldo de caixa?</small><strong class="neg">−R$ 15 mil</strong></div>
+      </div>
+      <div class="chart-box">
+        <svg id="chart" viewBox="0 0 560 280" role="img" aria-label="Gráfico do caixa mês a mês em R$, com três cenários: pessimista, base e otimista. No cenário base o caixa zera no mês 14."></svg>
+      </div>
+      <div class="mock-foot">
+        <span class="ruler" aria-hidden="true"><i class="on" style="width:70%"></i><i class="off" style="width:30%"></i></span>
+        <span class="small">14 de 20 premissas informadas por você</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3) PERGUNTAS DO FUNDADOR -->
+<section class="section">
+  <div class="wrap">
+    <p class="eyebrow">Para quem decide sozinho</p>
+    <h2>As perguntas que todo fundador faz sobre o caixa</h2>
+    <div class="q-list">
+      <div class="q-row">
+        <h3>Quantos meses de caixa eu tenho de verdade?</h3>
+        <p>O Keel monta o fluxo de caixa dos próximos 24 meses e mostra o mês em que o dinheiro acaba, se acabar.</p>
+      </div>
+      <div class="q-row">
+        <h3>Posso contratar mais uma pessoa?</h3>
+        <p>Veja o pior e o melhor caso antes de decidir contratar ou investir, e o que isso muda no ponto de equilíbrio.</p>
+      </div>
+      <div class="q-row">
+        <h3>Que imposto vou pagar se eu crescer?</h3>
+        <p>O plano estima os impostos do seu regime (MEI, Simples, Lucro Presumido ou Lucro Real). Assim você não descobre no mês em que o limite estoura.</p>
+      </div>
+      <div class="q-row">
+        <h3>Por que o extrato não bate com o plano?</h3>
+        <p>Importe o extrato do banco e veja, mês a mês, onde o dinheiro real saiu do planejado.</p>
+      </div>
+    </div>
+    <div class="enemy">
+      <p class="eyebrow">O que o Keel combate</p>
+      <p class="enemy-t">Planilha que ninguém atualiza. Palpite no lugar de número. Imposto que só aparece no mês em que o limite estoura.</p>
+      <p class="lead">O Keel existe para você parar de decidir no escuro.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 4) COMO FUNCIONA -->
+<section class="section alt" id="como-funciona">
+  <div class="wrap">
+    <p class="eyebrow">Como funciona</p>
+    <h2>Do primeiro número ao plano em três passos</h2>
+    <div class="steps">
+      <div class="step">
+        <span class="n">Passo 1</span>
+        <h3>Conte sobre o negócio</h3>
+        <p>Responda perguntas simples sobre caixa, preço, clientes e gastos, ou conte tudo em uma conversa. Se não souber um número, o Keel usa uma estimativa e avisa que é estimativa.</p>
+      </div>
+      <div class="step">
+        <span class="n">Passo 2</span>
+        <h3>Veja o resultado</h3>
+        <p>Fluxo de caixa de 24 meses em três cenários, com os impostos do seu regime tributário.</p>
+      </div>
+      <div class="step">
+        <span class="n">Passo 3</span>
+        <h3>Acompanhe o real</h3>
+        <p>Importe o extrato em CSV e compare, mês a mês, o que aconteceu com o que você planejou.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5) RECURSOS -->
+<section class="section" id="recursos">
+  <div class="wrap">
+    <p class="eyebrow">Recursos</p>
+    <h2>O que o Keel faz por você</h2>
+    <div class="features">
+      <div class="feat"><h3>Fluxo de caixa de 24 meses</h3><p>Saiba até quando o dinheiro dura, com base nos números que você informou.</p></div>
+      <div class="feat"><h3>Ponto de equilíbrio e retorno</h3><p>Veja quantos clientes e que faturamento fazem o negócio se pagar.</p></div>
+      <div class="feat"><h3>Três cenários</h3><p>Pessimista, base e otimista, lado a lado, antes de você decidir.</p></div>
+      <div class="feat"><h3>Impostos brasileiros</h3><p>MEI, Simples Nacional (com Fator R), Lucro Presumido e Lucro Real. É uma estimativa para planejar. Para escolher o regime, confirme com seu contador.</p></div>
+      <div class="feat"><h3>Régua de certeza</h3><p>Separa o que você sabe do que é estimativa, para você saber quanto confiar em cada resultado.</p></div>
+      <div class="feat"><h3>Extrato e lançamentos</h3><p>Envie o CSV do seu banco para comparar plano e realidade sem digitar nada. Inclua à mão o que não passa pelo banco e crie as categorias que precisar.</p></div>
+      <div class="feat"><h3>Fechamento do mês</h3><p>Feche o mês, compare com o plano e veja a projeção atualizada.</p></div>
+      <div class="feat"><h3>Pergunte ao Keel</h3><p>Tire dúvidas sobre o seu plano. A IA explica, e os números vêm do cálculo do sistema.</p></div>
+      <div class="feat"><h3>Relatório do plano</h3><p>Gere um relatório com o nome da sua empresa para mostrar a sócios e investidores. As estimativas aparecem marcadas.</p></div>
+      <div class="feat"><h3>Seus dados, sob seu controle</h3><p>Baixe ou exclua todas as suas informações quando quiser.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 6) IA E DADOS -->
+<section class="section band">
+  <div class="wrap">
+    <p class="eyebrow">Como o Keel usa IA</p>
+    <h2>A IA lê o que você escreve. As contas seguem regras fixas.</h2>
+    <div class="trust">
+      <div>
+        <h3>Número calculado, não opinião</h3>
+        <p>A IA conduz a entrevista e organiza o extrato. Todo cálculo é feito por regras definidas e testáveis.</p>
+      </div>
+      <div>
+        <h3>Estimativa aparece como estimativa</h3>
+        <p>Cada premissa vem marcada como informada ou estimada. Uma estimativa só entra no plano com a sua validação.</p>
+      </div>
+      <div>
+        <h3>Sem conexão com o seu banco</h3>
+        <p>Você envia um arquivo CSV. Nomes e documentos do extrato são mascarados antes de irem para a IA.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- O QUE O KEEL NÃO FAZ -->
+<section class="section">
+  <div class="wrap">
+    <p class="eyebrow">Limites do produto</p>
+    <h2>O que o Keel não faz</h2>
+    <div class="q-list">
+      <div class="q-row"><h3>Não promete resultado</h3><p>As projeções são estimativas e dependem dos dados e das hipóteses que você informa.</p></div>
+      <div class="q-row"><h3>Não substitui o seu contador</h3><p>A estimativa de impostos apoia o planejamento. Decisões fiscais precisam ser confirmadas com ele.</p></div>
+      <div class="q-row"><h3>Não se conecta ao seu banco</h3><p>Você envia um arquivo CSV. Não pedimos senha nem acesso à sua conta bancária.</p></div>
+      <div class="q-row"><h3>Não decide por você</h3><p>O Keel mostra os caminhos e as consequências. A decisão é sua.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 7) PREÇOS -->
+<section class="section alt" id="precos">
+  <div class="wrap">
+    <p class="eyebrow">Preço de lançamento</p>
+    <h2>Um plano só. Teste 7 dias antes de pagar.</h2>
+    <div class="one-plan">
+      <div class="plan best">
+        <div class="plan-head"><h3>Keel · lançamento</h3><span class="badge">7 dias grátis</span></div>
+        <div class="price">R$ 59,90 <small>/mês</small></div>
+        <p class="total">Cobrado todo mês. Quem assina no lançamento mantém este preço enquanto a assinatura estiver ativa.</p>
+        <p class="small">Cartão de crédito: renova sozinho todo mês.</p>
+        <a class="btn btn-primary" href="https://app.keelapp.com.br/?cadastro=1">Começar teste grátis</a>
+      </div>
+      <ul class="incl">
+        <li>Plano de negócios e fluxo de caixa de 24 meses</li>
+        <li>Três cenários, equilíbrio, payback e quanto o caixa dura</li>
+        <li>Impostos estimados do seu regime (MEI, Simples, Presumido ou Real)</li>
+        <li>Comparação do plano com o extrato bancário (CSV)</li>
+        <li>Assistente de IA para a entrevista e a categorização</li>
+      </ul>
+    </div>
+    <div class="price-notes small">
+      <p>Pagamento por Pix, boleto ou cartão, na página do Asaas. No cartão, a cobrança se renova sozinha. Com Pix ou boleto, você precisa pagar todo mês.</p>
+      <p>Cancele dentro do app quando quiser. Você mantém o acesso ao período que já pagou e seus dados continuam disponíveis para ver e baixar.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 8) DÚVIDAS -->
+<section class="section" id="duvidas">
+  <div class="wrap">
+    <p class="eyebrow">Dúvidas</p>
+    <h2>Perguntas comuns antes de começar</h2>
+    <div class="faq">
+      <details><summary>Já uso planilha, de graça. Por que mudar?</summary><p>A planilha serve se você sabe montar fluxo de caixa e conhece o seu regime tributário. O Keel faz as duas coisas por você e ainda compara o plano com o extrato do banco.</p></details>
+      <details><summary>A IA não erra conta?</summary><p>A IA não faz conta. Ela só entende o que você escreve. O cálculo é feito por regras fixas e testáveis.</p></details>
+      <details><summary>Posso confiar nos impostos?</summary><p>É uma estimativa para planejar e não substitui o seu contador. Para decidir o regime tributário, confirme com ele.</p></details>
+      <details><summary>Preciso dar acesso à minha conta bancária?</summary><p>Não. Não há conexão com o banco. Você sobe um arquivo CSV, e nomes e documentos são mascarados antes de irem para a IA.</p></details>
+      <details><summary>E se eu não souber os números?</summary><p>Responda “não sei”. O Keel usa uma estimativa, marca como estimativa e deixa você validar depois.</p></details>
+      <details><summary>R$ 59,90 por mês é caro?</summary><p>Compare com o custo de decidir uma contratação ou um investimento sem número. Você testa 7 dias antes de pagar e cancela dentro do app quando quiser.</p></details>
+      <details><summary>E se eu quiser sair?</summary><p>Você cancela dentro do app, baixa os seus dados e pode excluir a conta.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- CHAMADA FINAL -->
+<section class="section alt">
+  <div class="wrap final">
+    <div>
+      <h2>Seu caixa, sem achismos.</h2>
+      <p class="lead">Planeje os próximos meses e compare o planejado com o realizado.</p>
+    </div>
+    <a class="btn btn-primary" href="https://app.keelapp.com.br/?cadastro=1">Começar teste grátis</a>
+  </div>
+</section>
+</main>
+
+<!-- 9) RODAPÉ -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="brand" href="#topo" aria-label="Keel, início">
+          <svg viewBox="0 0 56 56" aria-hidden="true">
+            <circle cx="28" cy="28" r="28" fill="#0A2352"/>
+            <polygon points="23.3,23.6 10.1,45.9 27,35" fill="#2272F5"/>
+            <polygon points="27,35 10.1,45.9 31.7,32.7" fill="#1B54B8"/>
+            <polygon points="45.2,10.5 23.3,23.6 31.7,32.7" fill="#FFFFFF"/>
+          </svg>
+          <span>KEEL</span>
+        </a>
+        <p style="margin-top:12px">Clareza financeira para crescer. O Keel é um produto da Prime Hub 360.</p>
+      </div>
+      <div class="foot-links">
+        <a href="https://app.keelapp.com.br/termos/">Termos de Uso</a>
+        <a href="https://app.keelapp.com.br/privacidade/">Política de Privacidade</a>
+        <a href="contato.html">Contato</a>
+      </div>
+    </div>
+    <div class="legal">
+      <p>Prime Hub 360 Serviços Ltda · CNPJ 51.528.036/0001-83 · Santo André/SP</p>
+      <p>As projeções do Keel são estimativas e dependem dos dados e das hipóteses informados. Não representam garantia de resultado.</p>
+      <p>As estimativas tributárias apoiam o planejamento e não substituem a orientação de um contador.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- 10) SCRIPT DO GRÁFICO: desenha o exemplo do resultado com uma escala só (meses 1 a 24, R$ mil de -300 a 450) -->
+<script>
+(function () {
+  var svg = document.getElementById("chart");
+  if (!svg) return;
+  var NS = "http://www.w3.org/2000/svg";
+  var L = 46, R = 486, T = 14, B = 246, YMIN = -300, YMAX = 450;
+  function x(m) { return L + (m - 1) / 23 * (R - L); }
+  function y(v) { return T + (YMAX - v) / (YMAX - YMIN) * (B - T); }
+  function el(name, attrs, text) {
+    var e = document.createElementNS(NS, name);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    if (text != null) e.textContent = text;
+    svg.appendChild(e);
+    return e;
+  }
+  // grade e eixo Y
+  [450, 300, 150, 0, -150, -300].forEach(function (v) {
+    el("line", { x1: L, x2: R, y1: y(v), y2: y(v), stroke: "var(--line)", "stroke-width": 1 });
+    el("text", { x: L - 8, y: y(v) + 4, "text-anchor": "end" }, v === 0 ? "0" : (v < 0 ? "−" : "") + Math.abs(v) + " mil");
+  });
+  // eixo X
+  [[1, "mês 1"], [6, "6"], [12, "12"], [18, "18"], [24, "24"]].forEach(function (t) {
+    el("text", { x: x(t[0]), y: B + 22, "text-anchor": "middle" }, t[1]);
+  });
+  // linha de caixa zero, tracejada
+  el("line", { x1: L, x2: R, y1: y(0), y2: y(0), stroke: "var(--fg)", "stroke-width": 1.2, "stroke-dasharray": "4 4" });
+
+  // curva suave por pontos (Catmull-Rom convertido em Bézier)
+  function path(pts) {
+    var P = pts.map(function (p) { return [x(p[0]), y(p[1])]; });
+    var d = "M" + P[0][0] + "," + P[0][1];
+    for (var i = 0; i < P.length - 1; i++) {
+      var p0 = P[i - 1] || P[i], p1 = P[i], p2 = P[i + 1], p3 = P[i + 2] || p2;
+      d += " C" + (p1[0] + (p2[0] - p0[0]) / 6) + "," + (p1[1] + (p2[1] - p0[1]) / 6) + " " +
+           (p2[0] - (p3[0] - p1[0]) / 6) + "," + (p2[1] - (p3[1] - p1[1]) / 6) + " " + p2[0] + "," + p2[1];
+    }
+    return d;
+  }
+  var series = [
+    { name: "Otimista",  color: "var(--opt)",  pts: [[1,310],[6,190],[9,160],[12,172],[18,275],[24,416]] },
+    { name: "Pessimista",color: "var(--pess)", pts: [[1,310],[6,40],[9,-60],[12,-140],[18,-232],[24,-281]] },
+    { name: "Base",      color: "var(--accent)", pts: [[1,310],[6,170],[10,70],[14,0],[18,-15],[21,10],[24,38]] }
+  ];
+  series.forEach(function (s) {
+    el("path", { d: path(s.pts), fill: "none", stroke: s.color, "stroke-width": 2.6, "stroke-linecap": "round" });
+    var last = s.pts[s.pts.length - 1];
+    el("text", { x: R + 8, y: y(last[1]) + 4, class: "lbl" }, s.name);
+  });
+
+  // marcador: caixa zera no mês 14 (cenário base)
+  var mx = x(14), my = y(0);
+  el("line", { x1: mx, x2: mx, y1: my, y2: B, stroke: "var(--accent)", "stroke-width": 1.2, "stroke-dasharray": "2 3" });
+  el("circle", { cx: mx, cy: my, r: 5.5, fill: "var(--card)", stroke: "var(--accent)", "stroke-width": 2.5 });
+  el("rect", { x: mx + 14, y: my + 18, width: 128, height: 26, rx: 6, fill: "#101E32" });
+  el("text", { x: mx + 78, y: my + 35.5, "text-anchor": "middle", class: "tip-t" }, "Caixa zera · mês 14");
+})();
+</script>
+</body>
+</html>

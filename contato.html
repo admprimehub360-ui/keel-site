@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Contato | Keel</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@700;800&display=swap">
+<style>
+:root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+
+/* Layout: página única de leitura, texto à esquerda, exemplo real do produto ao lado do título. A régua de marcas (ideia da bússola) separa blocos. */
+:root {
+  --bg: #FFFFFF;
+  --bg-alt: #F4F6F9;
+  --card: #FFFFFF;
+  --ink: #101E32;
+  --fg: #253247;
+  --muted: #5B6B82;
+  --line: #E3E8EF;
+  --accent: #2563EB;
+  --btn: #2563EB;
+  --btn-fg: #FFFFFF;
+  --soft: #EEF3FE;
+  --good-bg: #DDF5E8;
+  --good-fg: #0F5132;
+  --neg: #B42318;
+  --pess: #D9531E;
+  --opt: #0E9F6E;
+  --band: #101E32;
+  --band-fg: #E6ECF5;
+  --band-muted: #B8C4D6;
+  --band-line: #26395A;
+  --tick-on: #101E32;
+  --tick-off: #8FB0F5;
+  --font-head: "Manrope", "Inter", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0A1322; --bg-alt: #0E192B; --card: #122038; --ink: #F2F5FA; --fg: #D3DBE8; --muted: #9BA9BF;
+    --line: #22344F; --accent: #7BA4FF; --soft: #16284A; --good-bg: #12382B; --good-fg: #8FE0B8;
+    --neg: #FF8A7A; --pess: #F0794A; --opt: #35C48F; --band: #0F1D34; --band-line: #26395A;
+    --tick-on: #E6ECF5; --tick-off: #5B8DEF; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0A1322; --bg-alt: #0E192B; --card: #122038; --ink: #F2F5FA; --fg: #D3DBE8; --muted: #9BA9BF;
+  --line: #22344F; --accent: #7BA4FF; --soft: #16284A; --good-bg: #12382B; --good-fg: #8FE0B8;
+  --neg: #FF8A7A; --pess: #F0794A; --opt: #35C48F; --band: #0F1D34; --band-line: #26395A;
+  --tick-on: #E6ECF5; --tick-off: #5B8DEF; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 110px; }
+body {
+  margin: 0; background: var(--bg); color: var(--fg);
+  font-family: var(--font-body); font-size: 17px; line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+body::before {
+  content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px);
+  z-index: 30; background: var(--bg);
+}
+h1, h2, h3 { font-family: var(--font-head); color: var(--ink); margin: 0; text-wrap: balance; }
+h1 { font-size: clamp(2.3rem, 5.4vw, 3.7rem); line-height: 1.05; font-weight: 800; letter-spacing: -0.02em; }
+h2 { font-size: clamp(1.7rem, 3.4vw, 2.4rem); line-height: 1.15; font-weight: 800; letter-spacing: -0.015em; }
+h3 { font-size: 1.1rem; line-height: 1.3; font-weight: 700; }
+p { margin: 0; }
+a { color: var(--accent); }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+
+.wrap {
+  width: 100%; max-width: 1180px; margin: 0 auto;
+  padding-left: max(20px, env(safe-area-inset-left, 0px));
+  padding-right: max(20px, env(safe-area-inset-right, 0px));
+}
+.section { padding-block: clamp(56px, 8vw, 104px); }
+.alt { background: var(--bg-alt); }
+.eyebrow { font-size: 0.8rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+.lead { font-size: 1.15rem; color: var(--muted); max-width: 40rem; }
+.small { font-size: 0.88rem; color: var(--muted); }
+
+/* botões */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 48px; padding: 0 22px; border-radius: 10px; font: 600 1rem var(--font-body);
+  text-decoration: none; border: 1.5px solid transparent; cursor: pointer; white-space: nowrap;
+}
+.btn-primary { background: var(--btn); color: var(--btn-fg); }
+.btn-primary:hover { filter: brightness(1.08); }
+.btn-ghost { background: transparent; color: var(--ink); border-color: var(--line); }
+.btn-ghost:hover { border-color: var(--accent); }
+.btn-sm { min-height: 40px; padding: 0 16px; font-size: 0.92rem; }
+
+/* 1) cabeçalho */
+.site-header {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
+  background: var(--bg); border-bottom: 1px solid var(--line);
+}
+.site-header .wrap { display: flex; align-items: center; gap: 16px 28px; flex-wrap: wrap; min-height: 68px; padding-block: 10px; }
+.brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); }
+.brand svg { width: 34px; height: 34px; flex: none; }
+.brand span { font: 800 1.35rem var(--font-head); letter-spacing: 0.06em; }
+.nav { display: flex; gap: 6px 22px; margin-left: auto; align-items: center; }
+.nav a:not(.btn) { color: var(--fg); text-decoration: none; font-weight: 500; font-size: 0.95rem; padding: 8px 2px; }
+.nav a:not(.btn):hover { color: var(--accent); }
+@media (max-width: 760px) {
+  .site-header .wrap { min-height: 0; }
+  .nav { order: 3; width: 100%; margin-left: 0; overflow-x: auto; gap: 20px; padding-bottom: 2px; }
+  .nav .btn { display: none; }
+  .site-header .btn-top { margin-left: auto; }
+}
+@media (min-width: 761px) { .site-header .btn-top { display: none; } }
+
+/* 2) hero */
+.hero { background: var(--bg-alt); padding-block: clamp(44px, 7vw, 88px) clamp(48px, 7vw, 80px); }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(32px, 5vw, 64px); align-items: center; }
+.hero h1 { margin-bottom: 22px; }
+.hero .lead { margin-bottom: 30px; }
+.cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 18px; }
+.ruler { display: block; height: 22px; width: 100%; max-width: 280px; margin: 26px 0 8px; display: flex; }
+.ruler i { display: block; height: 100%; }
+.ruler .on { width: 70%; background: repeating-linear-gradient(90deg, var(--tick-on) 0 2px, transparent 2px 7px); }
+.ruler .off { width: 30%; background: repeating-linear-gradient(90deg, var(--tick-off) 0 2px, transparent 2px 7px); }
+@media (max-width: 900px) { .hero-grid { grid-template-columns: minmax(0, 1fr); } }
+
+/* exemplo do produto */
+.mock {
+  background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+  padding: clamp(16px, 2.4vw, 24px); box-shadow: 0 18px 40px -22px rgba(16, 30, 50, 0.35);
+}
+.mock-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+.mock-top h3 { font-size: 1.2rem; }
+.tag { font-size: 0.74rem; font-weight: 600; letter-spacing: 0.04em; padding: 3px 10px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); }
+.metrics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-bottom: 16px; }
+.metric { background: var(--bg-alt); border-radius: 12px; padding: 12px 14px; min-width: 0; }
+.metric small { display: block; font-size: 0.74rem; color: var(--muted); line-height: 1.3; min-height: 2.6em; }
+.metric strong { display: block; font: 800 1.45rem/1.2 var(--font-head); color: var(--ink); margin-top: 6px; font-variant-numeric: tabular-nums; }
+.metric strong.neg { color: var(--neg); }
+.chart-box svg { display: block; width: 100%; height: auto; }
+.chart-box text { font: 500 13px var(--font-body); fill: var(--muted); }
+.chart-box .lbl { fill: var(--fg); font-weight: 600; }
+.chart-box .tip-t { fill: #FFFFFF; font-weight: 600; font-size: 12.5px; }
+.mock-foot { margin-top: 10px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.mock-foot .ruler { margin: 0; max-width: 150px; height: 16px; }
+@media (max-width: 480px) { .metric strong { font-size: 1.15rem; } .metric small { font-size: 0.7rem; } .metrics { gap: 8px; } .metric { padding: 10px; } }
+
+/* 3) perguntas */
+.q-list { margin-top: 40px; border-top: 1px solid var(--line); }
+.q-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 12px 48px; padding-block: 26px; border-bottom: 1px solid var(--line); }
+.q-row h3 { font-size: 1.25rem; }
+.q-row p { color: var(--fg); }
+@media (max-width: 760px) { .q-row { grid-template-columns: minmax(0, 1fr); } }
+
+/* 4) como funciona */
+.steps { margin-top: 44px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; counter-reset: step; }
+.step { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 26px; }
+.step .n { font: 800 0.95rem var(--font-head); color: var(--accent); margin-bottom: 14px; display: block; }
+.step h3 { margin-bottom: 10px; }
+.step p { color: var(--muted); font-size: 0.98rem; }
+@media (max-width: 860px) { .steps { grid-template-columns: minmax(0, 1fr); } }
+
+/* 5) recursos */
+.features { margin-top: 44px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 56px; }
+.feat { padding-block: 22px; border-top: 1px solid var(--line); }
+.feat h3 { margin-bottom: 6px; }
+.feat p { color: var(--muted); font-size: 0.98rem; }
+@media (max-width: 760px) { .features { grid-template-columns: minmax(0, 1fr); } }
+
+/* 6) IA e dados (faixa escura) */
+.band { background: var(--band); color: var(--band-fg); border-block: 1px solid var(--band-line); }
+.band h2 { color: #FFFFFF; max-width: 22ch; }
+.band .eyebrow { color: #8FB0F5; }
+.trust { margin-top: 44px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 36px; }
+.trust h3 { color: #FFFFFF; margin-bottom: 8px; }
+.trust p { color: var(--band-muted); font-size: 0.98rem; }
+.trust > div { border-top: 1px solid var(--band-line); padding-top: 20px; }
+@media (max-width: 860px) { .trust { grid-template-columns: minmax(0, 1fr); gap: 28px; } }
+
+/* 7) preços */
+.plans { margin-top: 44px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; align-items: stretch; }
+.plan { background: var(--card); border: 1.5px solid var(--line); border-radius: 16px; padding: 26px; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.plan.best { border-color: var(--accent); box-shadow: 0 0 0 3px var(--soft); }
+.plan-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; min-height: 28px; }
+.plan-head h3 { font-size: 1.05rem; }
+.badge { background: var(--btn); color: var(--btn-fg); font-size: 0.72rem; font-weight: 600; padding: 3px 10px; border-radius: 999px; }
+.price { font: 800 2.3rem/1.15 var(--font-head); color: var(--ink); margin-top: 10px; font-variant-numeric: tabular-nums; }
+.price small { font: 500 1rem var(--font-body); color: var(--muted); }
+.plan .total { color: var(--muted); font-size: 0.92rem; min-height: 3em; }
+.save { align-self: flex-start; background: var(--good-bg); color: var(--good-fg); font-size: 0.8rem; font-weight: 600; padding: 3px 12px; border-radius: 999px; min-height: 26px; }
+.save.none { background: transparent; }
+.plan .btn { margin-top: 18px; width: 100%; }
+.one-plan { margin-top: 44px; display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 32px 56px; align-items: center; }
+.one-plan .incl { margin-top: 0; grid-template-columns: minmax(0, 1fr); gap: 14px; }
+@media (max-width: 860px) { .one-plan { grid-template-columns: minmax(0, 1fr); } }
+.incl { margin-top: 36px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 40px; padding: 0; list-style: none; }
+.incl li { position: relative; padding-left: 28px; }
+.incl li::before { content: ""; position: absolute; left: 4px; top: 0.42em; width: 7px; height: 12px; border: solid var(--accent); border-width: 0 2.5px 2.5px 0; transform: rotate(45deg); }
+.price-notes { margin-top: 22px; display: grid; gap: 6px; max-width: 46rem; }
+@media (max-width: 860px) { .plans { grid-template-columns: minmax(0, 1fr); } .incl { grid-template-columns: minmax(0, 1fr); } .plan .total { min-height: 0; } }
+
+/* 8) dúvidas */
+.faq { margin-top: 40px; max-width: 52rem; border-top: 1px solid var(--line); }
+.faq details { border-bottom: 1px solid var(--line); }
+.faq summary { cursor: pointer; list-style: none; padding: 20px 36px 20px 0; position: relative; font: 700 1.08rem var(--font-head); color: var(--ink); }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; position: absolute; right: 4px; top: 50%; transform: translateY(-50%); font: 500 1.6rem var(--font-body); color: var(--accent); }
+.faq details[open] summary::after { content: "–"; }
+.faq details p { padding: 0 0 22px; color: var(--muted); max-width: 44rem; }
+
+/* chamada final e rodapé */
+.final { display: grid; grid-template-columns: minmax(0, 1.3fr) auto; gap: 24px 48px; align-items: center; }
+.final h2 { margin-bottom: 10px; }
+@media (max-width: 760px) { .final { grid-template-columns: minmax(0, 1fr); } }
+.site-footer { background: var(--bg-alt); border-top: 1px solid var(--line); padding-block: 48px; }
+.foot-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 28px 48px; }
+.foot-grid p { font-size: 0.9rem; color: var(--muted); max-width: 40rem; }
+.foot-links { display: flex; flex-wrap: wrap; gap: 8px 24px; font-size: 0.92rem; color: var(--fg); }
+.legal { margin-top: 18px; display: grid; gap: 8px; }
+@media (max-width: 760px) { .foot-grid { grid-template-columns: minmax(0, 1fr); } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+
+/* páginas internas */
+.page-head { background: var(--bg-alt); padding-block: clamp(44px, 7vw, 84px); border-bottom: 1px solid var(--line); }
+.page-head h1 { font-size: clamp(2rem, 4.6vw, 3.1rem); margin-bottom: 18px; max-width: 20ch; }
+.two-col { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 20px 56px; }
+.two-col > h2 { font-size: clamp(1.4rem, 2.6vw, 1.8rem); }
+.two-col p + p { margin-top: 14px; }
+@media (max-width: 760px) { .two-col { grid-template-columns: minmax(0, 1fr); } }
+.contact-card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: clamp(22px, 3vw, 32px); max-width: 640px; }
+.contact-card h2 { font-size: 1.3rem; margin-bottom: 10px; }
+.mail-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; margin: 14px 0 8px; }
+.mail-row code { font: 600 1.15rem var(--font-body); color: var(--ink); user-select: all; overflow-wrap: anywhere; }
+.copy-msg { font-size: 0.85rem; color: var(--muted); min-height: 1.4em; }
+.company { margin-top: 28px; padding-top: 22px; border-top: 1px solid var(--line); font-size: 0.95rem; color: var(--muted); display: grid; gap: 4px; }
+
+.nav a[aria-current="page"] { color: var(--accent); }
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="Keel, início"><svg viewBox="0 0 56 56" role="img" aria-hidden="true">
+        <circle cx="28" cy="28" r="28" fill="#0A2352"/>
+        <polygon points="23.3,23.6 10.1,45.9 27,35" fill="#2272F5"/>
+        <polygon points="27,35 10.1,45.9 31.7,32.7" fill="#1B54B8"/>
+        <polygon points="45.2,10.5 23.3,23.6 31.7,32.7" fill="#FFFFFF"/>
+      </svg><span>KEEL</span></a>
+    <nav class="nav" aria-label="Principal">
+      <a href="index.html#como-funciona">Como funciona</a>
+      <a href="index.html#recursos">Recursos</a>
+      <a href="index.html#precos">Preços</a>
+      <a href="index.html#duvidas">Dúvidas</a>
+      <a href="sobre.html">Sobre</a>
+      <a href="contato.html" aria-current="page">Contato</a>
+      <a href="https://app.keelapp.com.br/">Entrar</a>
+      <a class="btn btn-primary btn-sm" href="https://app.keelapp.com.br/?cadastro=1">Começar teste grátis</a>
+    </nav>
+    <a class="btn btn-primary btn-sm btn-top" href="https://app.keelapp.com.br/?cadastro=1">Começar</a>
+  </div>
+</header>
+<main id="topo">
+<!-- ARQUIVO: contato.html. Função: canal de suporte por e-mail e dados da empresa. -->
+<section class="page-head">
+  <div class="wrap">
+    <p class="eyebrow">Contato</p>
+    <h1>Fale com o Keel</h1>
+    <p class="lead">Dúvidas sobre o produto, suporte e pedidos sobre os seus dados.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="contact-card">
+      <h2>Suporte por e-mail</h2>
+      <p>Escreva para o endereço abaixo. Respondemos em até 1 dia útil. Quanto mais detalhes você enviar, mais rápido conseguimos ajudar.</p>
+      <div class="mail-row">
+        <code id="mail">suporte@keelapp.com.br</code>
+        <button class="btn btn-ghost btn-sm" type="button" id="copy">Copiar e-mail</button>
+      </div>
+      <p class="copy-msg" id="copy-msg" role="status"></p>
+      <div class="company">
+        <span><strong>Prime Hub 360 Serviços Ltda</strong></span>
+        <span>CNPJ 51.528.036/0001-83</span>
+        <span>Rua das Paineiras, 385, Jardim, Santo André/SP, CEP 09.070-220</span>
+      </div>
+    </div>
+    <div class="price-notes small" style="margin-top:28px">
+      <p><strong>Seus dados:</strong> na tela Conta do app você baixa todos os seus dados e exclui a sua conta. Para outros pedidos sobre dados pessoais, escreva para o mesmo e-mail e peça para falar com o encarregado de dados.</p>
+    </div>
+  </div>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="brand" href="index.html" aria-label="Keel, início"><svg viewBox="0 0 56 56" role="img" aria-hidden="true">
+        <circle cx="28" cy="28" r="28" fill="#0A2352"/>
+        <polygon points="23.3,23.6 10.1,45.9 27,35" fill="#2272F5"/>
+        <polygon points="27,35 10.1,45.9 31.7,32.7" fill="#1B54B8"/>
+        <polygon points="45.2,10.5 23.3,23.6 31.7,32.7" fill="#FFFFFF"/>
+      </svg><span>KEEL</span></a>
+        <p style="margin-top:12px">Clareza financeira para crescer. O Keel é um produto da Prime Hub 360.</p>
+      </div>
+      <div class="foot-links">
+        <a href="https://app.keelapp.com.br/termos/">Termos de Uso</a>
+        <a href="https://app.keelapp.com.br/privacidade/">Política de Privacidade</a>
+        <a href="contato.html">Contato</a>
+      </div>
+    </div>
+    <div class="legal">
+      <p>Prime Hub 360 Serviços Ltda · CNPJ 51.528.036/0001-83 · Santo André/SP</p>
+      <p>As projeções do Keel são estimativas e dependem dos dados e das hipóteses informados. Não representam garantia de resultado.</p>
+      <p>As estimativas tributárias apoiam o planejamento e não substituem a orientação de um contador.</p>
+    </div>
+  </div>
+</footer>
+<script>
+(function () {
+  var btn = document.getElementById("copy"), msg = document.getElementById("copy-msg"), mail = document.getElementById("mail");
+  if (!btn) return;
+  function done(t) { msg.textContent = t; setTimeout(function () { msg.textContent = ""; }, 3000); }
+  btn.addEventListener("click", function () {
+    var text = mail.textContent;
+    function fallback() {
+      var r = document.createRange(); r.selectNodeContents(mail);
+      var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+      done("Selecionei o e-mail. Copie com o menu do seu aparelho.");
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () { done("E-mail copiado."); }, fallback);
+    } else { fallback(); }
+  });
+})();
+</script>
+</body>
+</html>
